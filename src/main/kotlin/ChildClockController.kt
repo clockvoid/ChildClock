@@ -27,8 +27,11 @@ class ChildClockController : Initializable {
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         this.timer.cycleCount = Timeline.INDEFINITE
         this.timer.play()
+        this.button1.isMnemonicParsing = true
         this.button1.onAction = EventHandler<ActionEvent> {
+            this.button1.isMnemonicParsing = false
             this.button1OnAction()
+            this.button1.isMnemonicParsing = true
         }
     }
 
