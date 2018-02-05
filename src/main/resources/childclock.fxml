@@ -1,0 +1,22 @@
+<?import javafx.scene.control.Label?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.FlowPane?>
+
+<?import javafx.scene.layout.VBox?>
+<FlowPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          orientation="VERTICAL"
+          alignment="CENTER"
+          hgap="10"
+          vgap="10"
+          fx:controller="ChildClockController">
+    <stylesheets>
+        <URL value="@style.css"/>
+    </stylesheets>
+
+    <VBox>
+        <Label fx:id="label1" text="00:00:00" />
+        <Button fx:id="button1" text="STOP" maxWidth="Infinity" />
+    </VBox>
+</FlowPane>

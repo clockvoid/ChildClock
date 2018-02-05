@@ -1,0 +1,12 @@
+
+Label#label1 {
+    -fx-font-family: SansSerif;
+    -fx-font-size: 30pt;
+}
+
+Button#button1 {
+    -fx-animated: true;
+    -fx-font-family: SansSerif;
+    -fx-font-size: 15pt;
+    -fx-text-aligment: center;
+}
