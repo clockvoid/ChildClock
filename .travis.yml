@@ -1,0 +1,33 @@
+
+language: java
+
+matrix:
+  include:
+    - os: linux
+      sudo: false
+      jdk: oraclejdk8
+      addons:
+        apt:
+          packages:
+            - oracle-java8-installer
+            - oracle-java8-set-default
+
+script: ./gradlew build makeExecutableJar --info --stacktrace --console=plain --max-workers=1 --no-daemon -Dkotlin.compiler.execution.strategy=in-proces -Dkotlin.colors.enabled=false
+
+deploy:
+  provider: releases
+  api_key: 807d9c1dfc17983c092ce31d062d7687dea43d01
+  file: $HOME/build/libs/childclock.jar
+  skip_cleanup: true
+  on:
+    tags: true
+
+before_cache:
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/

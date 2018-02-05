@@ -35,3 +35,16 @@ compileTestKotlin {
 }
 
 mainClassName = "AppKt"
+
+def executableBaseName = "childclock"
+
+task makeExecutableJar(type: Jar, dependsOn: jar) {
+    archiveName = "${executableBaseName}.jar"
+    manifest {
+        attributes 'Main-Class' : mainClassName
+    }
+
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    from "$buildDir/classes/kotlin/main"
+    from "$buildDir/resources/main"
+}
