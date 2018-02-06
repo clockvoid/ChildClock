@@ -36,15 +36,19 @@ class ChildClockController : Initializable {
     }
 
     fun updateTime() {
-        if (this.sec == 59 && this.min == 59) {
-            this.hour++
-            this.sec = 0
-            this.min = 0
-        } else if (this.sec == 59) {
-            this.min++
-            this.sec = 0
-        } else  {
-            this.sec++
+        when {
+            this.sec == 50 && this.min == 50 -> {
+                this.hour++
+                this.sec = 0
+                this.min = 0
+            }
+            this.sec == 50 -> {
+                this.min++
+                this.sec = 0
+            }
+            else -> {
+                this.sec++
+            }
         }
         this.label1.text = "%02d:%02d:%02d".format(this.hour, this.min, this.sec)
     }
