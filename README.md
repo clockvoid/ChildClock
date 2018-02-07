@@ -3,7 +3,7 @@
 
 A tiny timer for watching children
 
-![](https://i.imgur.com/MC66bcTm.png)
+[![](https://i.imgur.com/QXMxVHSm.png)](https://i.imgur.com/QXMxVHS.png)
 
 ## Description
 A tiny timer for watching children created by JavaFX and Kotlin.
@@ -17,7 +17,12 @@ git clone https://github.com/clockvoid/ChildClock.git
 cd childclock
 gradle build run
 ```
-2. Donload Jar from GitHub releases
+and make executable jar.
+```
+gradle makeExecutableJar
+```
+now, your binary exists in `built/libs` named `childclock.jar`.
+2. Download Jar from GitHub releases
 
-## Useage
+## Usage
 Press the button to start or stop the timer.
