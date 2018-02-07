@@ -1,12 +1,17 @@
 
-Label#label1 {
+Label {
     -fx-font-family: SansSerif;
     -fx-font-size: 30pt;
+    -fx-text-alignment: center;
 }
 
-Button#button1 {
+Button {
     -fx-animated: true;
     -fx-font-family: SansSerif;
     -fx-font-size: 15pt;
     -fx-text-aligment: center;
+}
+
+VBox {
+    -fx-padding: 5px;
 }

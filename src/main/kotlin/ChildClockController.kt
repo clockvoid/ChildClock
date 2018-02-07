@@ -1,33 +1,48 @@
 
+import javafx.application.Platform
 import javafx.fxml.FXML
 import javafx.fxml.Initializable
 import javafx.event.ActionEvent
 import javafx.event.EventHandler
 import javafx.scene.control.Button
 import javafx.scene.control.Label
+import javafx.scene.control.MenuItem
+import javafx.scene.input.KeyCombination
 import java.net.URL
 import java.util.*
 
 class ChildClockController : Initializable {
-    @FXML lateinit var label1: Label
-    @FXML lateinit var button1: Button
+    @FXML lateinit var timeLabel: Label
+    @FXML lateinit var startStopButton: Button
+    @FXML lateinit var resetButton: Button
+    @FXML lateinit var exit: MenuItem
     private lateinit var timerModel: TimerModel
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
-        this.button1.isMnemonicParsing = true
-        this.button1.onAction = EventHandler<ActionEvent> {
-            this.button1.isMnemonicParsing = false
+        this.startStopButton.isMnemonicParsing = true
+        this.startStopButton.onAction = EventHandler<ActionEvent> {
+            this.startStopButton.isMnemonicParsing = false
             this.timerModel.onStartOrStop()
-            this.button1.isMnemonicParsing = true
+            this.startStopButton.isMnemonicParsing = true
+        }
+        this.resetButton.isMnemonicParsing = true
+        this.resetButton.onAction = EventHandler<ActionEvent>{
+            this.resetButton.isMnemonicParsing = false
+            this.timerModel.reset()
+            this.resetButton.isMnemonicParsing = true
+        }
+        this.exit.accelerator = KeyCombination.valueOf("Shortcut+c")
+        this.exit.onAction = EventHandler<ActionEvent> {
+            Platform.exit()
         }
         this.timerModel = TimerModel(this)
     }
 
     fun setTimeText(sec: Int, min: Int, hour: Int) {
-        this.label1.text = "%02d:%02d:%02d".format(hour, min, sec)
+        this.timeLabel.text = "%02d:%02d:%02d".format(hour, min, sec)
     }
 
     fun setButtonText(text: String) {
-        this.button1.text = text
+        this.startStopButton.text = text
     }
 }
