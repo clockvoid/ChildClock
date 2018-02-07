@@ -59,6 +59,7 @@ class TimerModel(private val controller: ChildClockController) {
         this.sec = 0
         this.min = 0
         this.hour = 0
-        this.isMove = true
+        this.controller.setTimeText(0, 0, 0)
+        this.start()
     }
 }
