@@ -15,7 +15,7 @@ script: ./gradlew build makeExecutableJar --info --stacktrace --console=plain --
 
 deploy:
   provider: releases
-  api_key: 807d9c1dfc17983c092ce31d062d7687dea43d01
+  api_key: 035d1028c2af731f4e5b5a3c5b61a5c60b709120
   file: $HOME/build/libs/childclock.jar
   skip_cleanup: true
   on:
