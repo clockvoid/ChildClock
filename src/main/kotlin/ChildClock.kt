@@ -10,8 +10,6 @@ import java.awt.MenuItem
 import java.awt.PopupMenu
 import java.awt.SystemTray
 import java.awt.TrayIcon
-import java.awt.event.ActionEvent
-import java.awt.event.ActionListener
 import javax.imageio.ImageIO
 
 class ChildClock : Application() {
@@ -29,11 +27,9 @@ class ChildClock : Application() {
         this.popupMenu = PopupMenu()
         // init exit menu exit to push
         val exitMenu  = MenuItem("Exit")
-        exitMenu.addActionListener(object : ActionListener {
-            override fun actionPerformed(e: ActionEvent) {
-                Platform.exit() // In JavaFX, we have to use Platform.exit() because of Thread problems
-            }
-        })
+        exitMenu.addActionListener {
+            Platform.exit() // In JavaFX, we have to use Platform.exit() because of Thread problems
+        }
         this.popupMenu.add(exitMenu)
         this.icon.popupMenu = this.popupMenu
     }
@@ -43,11 +39,7 @@ class ChildClock : Application() {
         primaryStage.icons.add(Image("web_hi_res_512.png"))
         primaryStage.scene = Scene(FXMLLoader.load<Parent>(this.javaClass.getResource("childclock.fxml")), 300.0, 300.0)
         primaryStage.show()
-        this.icon.addActionListener(object : ActionListener {
-            override fun actionPerformed(e: ActionEvent) {
-                Platform.runLater({ primaryStage.show() })
-            }
-        })
+        this.icon.addActionListener { Platform.runLater({ primaryStage.show() }) }
         this.tray.add(this.icon)
         Platform.setImplicitExit(false)
     }
