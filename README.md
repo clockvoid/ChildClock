@@ -11,18 +11,21 @@ This program measure how long children playing game or something in PC.
 This program runs 3 billion computers because of JVM.
 
 ## Installation
-1. You can build the project by gradle.
-```
-git clone https://github.com/clockvoid/ChildClock.git
-cd childclock
-gradle build run
-```
-and make executable jar.
-```
-gradle makeExecutableJar
-```
-now, your binary exists in `built/libs` named `childclock.jar`.
-2. Download Jar from GitHub releases
+* You can build the project by gradle.
+    ```
+    git clone https://github.com/clockvoid/ChildClock.git
+    cd childclock
+    gradle build run
+    ```
+    and make executable jar.
+    ```
+    gradle makeExecutableJar
+    ```
+    now, your binary exists in `built/libs` named `childclock.jar`.
+
+* Download Jar from GitHub releases
+
+    See [Releases](https://github.com/clockvoid/ChildClock/releases)!
 
 ## Usage
 Press the button to start or stop the timer.
