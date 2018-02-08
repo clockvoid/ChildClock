@@ -15,7 +15,8 @@ script: ./gradlew build makeExecutableJar --info --stacktrace --console=plain --
 
 deploy:
   provider: releases
-  api_key: 035d1028c2af731f4e5b5a3c5b61a5c60b709120
+  api_key:
+    secure: cNpnIYhS0TNG9HSDRxRmoatd0Ykt8dNpjdzv1tJL/f5cma3Vh969bPOQCJgVKe5swZ6gF6Wj3tnZfnbNQXWIkWwWTL574HfZ/w5Yvge70BgM+p5MZTQBQqkMLX4DKlaLRM9T/8sLhrpgAjN/XO4GvvrhVwbQwUeWAnjCHSJwCnSnWa1cZgdjN2iqZ7QfzdlzvuX4UCZ/wO16XvPz194iHsORQcBq2uoiYb9ikfuStp1EzQuozbvVMmowstiYiDftbt/VgX8oi/RX3AVqg3KYvbF9XowGRqconvjwVMZf/ivGH4xerFzLLy2bClbKLyPCqwE9qxbp8MxI+RgIpRVAQ7FmBHgfUs09Ht5IHEWpgyMeM3/X+YMeFtceOQ8UiTfBnpBeWUyGRKylDuS2IWPAjpc0Uh263SgFNfopzzYvg/FR2RYiVrn/jUifok/n/Hlb6IyR1thbx2unzLmk/ejWLVkiBPLMVMnY7nuI/KW8DVkM5lRKojNe+t6NsdJfHgJNR2MjT6gWMF3U+ZI4fO5ppQSI7s1Q2DMp+H5TVfoXgLy/KWJleO0tIxAysCJneCMQmfQY7R5pT1DbrCdcQ97zyTceQwS/E9JTchVuIzI1HGtIH3ivPxSa/1b+bn2cdtETcWfS8jE6BguNwwyTMygTHqlXp1RhOL0VGyJHgDi+jkY=
   file: $HOME/build/libs/childclock.jar
   skip_cleanup: true
   on:
