@@ -4,6 +4,9 @@ import javafx.animation.Timeline
 import javafx.event.ActionEvent
 import javafx.event.EventHandler
 import javafx.util.Duration
+import java.util.*
+import org.apache.commons.lang3.time.DateUtils
+import java.io.File
 
 class TimerModel(private val controller: ChildClockController) {
     private var sec: Int = 0
@@ -12,6 +15,8 @@ class TimerModel(private val controller: ChildClockController) {
     var isMove: Boolean = true
         private set
     private val timer = Timeline(KeyFrame(Duration.millis(1000.0), EventHandler<ActionEvent> { updateTime() }))
+    private val calendar = TimeCalendar(File("src/main/resources/calendar.json"))
+    private var date: Date = DateUtils.truncate(Date(), Calendar.DAY_OF_MONTH)
 
     init {
         this.timer.cycleCount = Timeline.INDEFINITE
@@ -19,6 +24,7 @@ class TimerModel(private val controller: ChildClockController) {
     }
 
     private fun updateTime() {
+        val now: Date = DateUtils.truncate(Date(), Calendar.DAY_OF_MONTH)
         when {
             this.sec == 50 && this.min == 50 -> {
                 this.hour++
@@ -32,6 +38,13 @@ class TimerModel(private val controller: ChildClockController) {
             else -> {
                 this.sec++
             }
+        }
+        if (this.date.after(now)) {
+            val today = Day(this.date.toString(), "%02d:%02d:%02d".format(this.hour, this.min, this.sec))
+            calendar.addDay(today)
+            calendar.makeJson()
+            calendar.writeFile()
+            this.date = now
         }
         this.controller.setTimeText(this.sec, this.min, this.hour)
     }
