@@ -26,7 +26,7 @@ class TimeCalendar(private val jsonFile: File) {
     }
 
     fun writeFile() {
-        this.jsonFile.absoluteFile.bufferedWriter(Charsets.UTF_8).write(this.json)
+        this.jsonFile.absoluteFile.bufferedWriter(Charsets.UTF_8).use({ out -> out.write(this.json) })
     }
 
     fun addDay(arg: Day) {
