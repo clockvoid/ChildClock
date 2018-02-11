@@ -1,4 +1,4 @@
-package childclock
+package com.lucciola.childclock
 
 import javafx.animation.KeyFrame
 import javafx.animation.Timeline
@@ -9,7 +9,8 @@ import javafx.util.Duration
 import java.util.*
 import org.apache.commons.lang3.time.DateUtils
 import java.io.File
-import com.lucciola.calendar
+import com.lucciola.calendar.TimeCalendar
+import com.lucciola.calendar.CalendarView
 
 class TimerModel(private val controller: ChildClockController) {
     private var sec: Int = 0
@@ -18,7 +19,7 @@ class TimerModel(private val controller: ChildClockController) {
     var isMove: Boolean = true
         private set
     private val timer = Timeline(KeyFrame(Duration.millis(1000.0), EventHandler<ActionEvent> { updateTime() }))
-    private val calendar = calendar.TimeCalendar(File("src/main/resources/calendar.json"))
+    private val calendar = TimeCalendar(File(this.javaClass.classLoader.getResource("calendar.json").toURI()))
     private var date: Date = DateUtils.truncate(Date(), Calendar.DAY_OF_MONTH)
 
     init {

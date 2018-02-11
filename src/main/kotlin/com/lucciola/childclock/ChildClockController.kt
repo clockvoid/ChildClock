@@ -1,4 +1,4 @@
-package childclock
+package com.lucciola.childclock
 import javafx.application.Platform
 import javafx.fxml.FXML
 import javafx.fxml.Initializable

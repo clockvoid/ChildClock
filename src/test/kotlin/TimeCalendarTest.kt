@@ -1,4 +1,6 @@
 
+import com.lucciola.calendar.Day
+import com.lucciola.calendar.TimeCalendar
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -24,10 +26,8 @@ class TimeCalendarTest {
 
     @Test
     fun testAddingAndReadingDayList() {
-        val day1 = Day(Date().toString(), 100.toString())
-        val day2 = Day(Date().toString(), 10000.toString())
-        this.timeCalendar.addDay(day1)
-        this.timeCalendar.addDay(day2)
+        this.timeCalendar.addDay(Date(), 0, 0, 10)
+        this.timeCalendar.addDay(Date(), 0, 0, 50)
         this.timeCalendar.makeJson()
         println(this.timeCalendar.json)
         this.timeCalendar.writeFile()
@@ -35,5 +35,12 @@ class TimeCalendarTest {
         this.timeCalendar.readFile()
         val jsonData2: List<Day> = this.timeCalendar.jsonData
         assertEquals(jsonData, jsonData2)
+    }
+
+    @Test
+    fun testSearchDate() {
+        val date = Date()
+        this.timeCalendar.addDay(date, 0, 0, 10)
+        assertEquals("00:00:10", this.timeCalendar.searchDate(date))
     }
 }
