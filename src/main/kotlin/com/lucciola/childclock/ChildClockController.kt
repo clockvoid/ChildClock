@@ -1,4 +1,4 @@
-
+package childclock
 import javafx.application.Platform
 import javafx.fxml.FXML
 import javafx.fxml.Initializable
@@ -8,6 +8,7 @@ import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.MenuItem
 import javafx.scene.input.KeyCombination
+import javafx.stage.Stage
 import java.net.URL
 import java.util.*
 
@@ -16,6 +17,7 @@ class ChildClockController : Initializable {
     @FXML lateinit var startStopButton: Button
     @FXML lateinit var resetButton: Button
     @FXML lateinit var exit: MenuItem
+    @FXML lateinit var calendar: MenuItem
     private lateinit var timerModel: TimerModel
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
@@ -36,6 +38,10 @@ class ChildClockController : Initializable {
             Platform.exit()
         }
         this.timerModel = TimerModel(this)
+        this.calendar.onAction = EventHandler {
+            val primaryStage = this.timeLabel.scene.window as Stage
+            this.timerModel.createCalendar(primaryStage)
+        }
     }
 
     fun setTimeText(sec: Int, min: Int, hour: Int) {

@@ -1,12 +1,15 @@
+package childclock
 
 import javafx.animation.KeyFrame
 import javafx.animation.Timeline
 import javafx.event.ActionEvent
 import javafx.event.EventHandler
+import javafx.stage.Stage
 import javafx.util.Duration
 import java.util.*
 import org.apache.commons.lang3.time.DateUtils
 import java.io.File
+import com.lucciola.calendar
 
 class TimerModel(private val controller: ChildClockController) {
     private var sec: Int = 0
@@ -15,7 +18,7 @@ class TimerModel(private val controller: ChildClockController) {
     var isMove: Boolean = true
         private set
     private val timer = Timeline(KeyFrame(Duration.millis(1000.0), EventHandler<ActionEvent> { updateTime() }))
-    private val calendar = TimeCalendar(File("src/main/resources/calendar.json"))
+    private val calendar = calendar.TimeCalendar(File("src/main/resources/calendar.json"))
     private var date: Date = DateUtils.truncate(Date(), Calendar.DAY_OF_MONTH)
 
     init {
@@ -40,8 +43,7 @@ class TimerModel(private val controller: ChildClockController) {
             }
         }
         if (this.date.after(now)) {
-            val today = Day(this.date.toString(), "%02d:%02d:%02d".format(this.hour, this.min, this.sec))
-            calendar.addDay(today)
+            calendar.addDay(this.date, this.hour, this.min, this.sec)
             calendar.makeJson()
             calendar.writeFile()
             this.date = now
@@ -74,5 +76,9 @@ class TimerModel(private val controller: ChildClockController) {
         this.hour = 0
         this.controller.setTimeText(0, 0, 0)
         this.start()
+    }
+
+    fun createCalendar(primaryStage: Stage) {
+        val calendar = CalendarView(primaryStage, this.calendar)
     }
 }
