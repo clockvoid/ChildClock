@@ -1,7 +1,7 @@
 # ChildClock
 [![Build Status](https://travis-ci.org/clockvoid/ChildClock.svg?branch=master)](https://travis-ci.org/clockvoid/ChildClock)
 
-A tiny timer for watching children
+A tiny timer for managing time
 
 [![](https://i.imgur.com/QXMxVHSm.png)](https://i.imgur.com/QXMxVHS.png)
 
@@ -15,7 +15,7 @@ This program runs 3 billion computers because of JVM.
     ```
     git clone https://github.com/clockvoid/ChildClock.git
     cd childclock
-    gradle build run
+    gradle build
     ```
     and make executable jar.
     ```
@@ -28,4 +28,16 @@ This program runs 3 billion computers because of JVM.
     See [Releases](https://github.com/clockvoid/ChildClock/releases)!
 
 ## Usage
-Press the button to start or stop the timer.
+* Using Gradle
+    ```
+    gradle run
+    ```
+    
+* Using Java command
+
+    Before this, you have to make executable Jar.
+    ```
+    java -jar childclock.jar
+    ```
+
+* Double click executable Jar(Only on Windows)
