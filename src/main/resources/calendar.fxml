@@ -14,7 +14,7 @@
           alignment="CENTER">
         <TilePane orientation="HORIZONTAL"
                   alignment="CENTER">
-            <ComboBox fx:id="pulldown" maxWidth="-Infinity"/>
+            <ComboBox fx:id="pulldown" maxWidth="-Infinity" value="date"/>
             <Button fx:id="button" text="Select" maxWidth="-Infinity"/>
         </TilePane>
         <Label fx:id="timeLabel" text="Select date" style="-fx-text-alignment: center" maxWidth="-Infinity"/>
