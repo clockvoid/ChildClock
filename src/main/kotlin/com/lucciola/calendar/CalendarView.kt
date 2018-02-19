@@ -9,7 +9,7 @@ import javafx.stage.Stage
 
 class CalendarView(private val primaryStage: Stage, private val timeCalendar: TimeCalendar) {
     private val stage = Stage()
-    private val fxmlLoader = FXMLLoader(this.javaClass.classLoader.getResource("calendar.fxml"))
+    private val fxmlLoader = FXMLLoader(this::class.java.classLoader.getResource("calendar.fxml"))
     private val parent: Parent = this.fxmlLoader.load()
     private val controller: CalendarController = this.fxmlLoader.getController()
 

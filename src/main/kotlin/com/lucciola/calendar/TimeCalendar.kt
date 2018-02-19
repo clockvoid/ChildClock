@@ -24,6 +24,9 @@ class TimeCalendar(private val jsonFile: File) {
     }
 
     fun readFile(): String {
+        if (!this.jsonFile.exists()) {
+            this.jsonFile.createNewFile()
+        }
         this.json = this.jsonFile.absoluteFile.bufferedReader(Charsets.UTF_8).use({ it.readText() })
         // Moshi cannot parse empty json
         when (this.json) {
