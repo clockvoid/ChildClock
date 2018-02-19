@@ -15,7 +15,7 @@ import javax.imageio.ImageIO
 class ChildClockView {
     // Task Tray Icon Initialisation
     private var tray: SystemTray = SystemTray.getSystemTray()
-    private var icon: TrayIcon = TrayIcon(ImageIO.read(this.javaClass.classLoader.getResource("web_hi_res_512.png")))
+    private var icon: TrayIcon = TrayIcon(ImageIO.read(this::class.java.classLoader.getResource("web_hi_res_512.png")))
     // init popup menu
     private var popupMenu = PopupMenu()
 
@@ -32,9 +32,11 @@ class ChildClockView {
     }
 
     fun start(primaryStage: Stage) {
+        val fxmlLoader = FXMLLoader(this::class.java.classLoader.getResource("childclock.fxml"))
+        val parent: Parent = fxmlLoader.load()
         primaryStage.title = "Child Clock"
         primaryStage.icons.add(Image("web_hi_res_512.png"))
-        primaryStage.scene = Scene(FXMLLoader.load<Parent>(this.javaClass.classLoader.getResource("childclock.fxml")), 300.0, 300.0)
+        primaryStage.scene = Scene(parent, 300.0, 300.0)
         primaryStage.show()
         this.icon.addActionListener { Platform.runLater({ primaryStage.show() }) }
         this.tray.add(this.icon)

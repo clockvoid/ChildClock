@@ -19,7 +19,7 @@ class TimerModel(private val controller: ChildClockController) {
     var isMove: Boolean = true
         private set
     private val timer = Timeline(KeyFrame(Duration.millis(1000.0), EventHandler<ActionEvent> { updateTime() }))
-    private val calendar = TimeCalendar(File(this.javaClass.classLoader.getResource("calendar.json").toURI()))
+    private val calendar = TimeCalendar(File("calendar.json"))
     private var date: Date = DateUtils.truncate(Date(), Calendar.DAY_OF_MONTH)
 
     init {
