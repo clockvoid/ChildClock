@@ -12,7 +12,7 @@ import javafx.stage.Stage
 import java.net.URL
 import java.util.*
 
-class ChildClockController : Initializable {
+open class ChildClockController : Initializable {
     @FXML lateinit var timeLabel: Label
     @FXML lateinit var startStopButton: Button
     @FXML lateinit var resetButton: Button
@@ -44,11 +44,11 @@ class ChildClockController : Initializable {
         }
     }
 
-    fun setTimeText(sec: Int, min: Int, hour: Int) {
+    open fun setTimeText(sec: Int, min: Int, hour: Int) {
         this.timeLabel.text = "%02d:%02d:%02d".format(hour, min, sec)
     }
 
-    fun setButtonText(text: String) {
+    open fun setButtonText(text: String) {
         this.startStopButton.text = text
     }
 }

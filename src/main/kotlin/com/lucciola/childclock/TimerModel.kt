@@ -27,8 +27,23 @@ class TimerModel(private val controller: ChildClockController) {
         this.timer.play()
     }
 
+    fun isNextDay(now: Date): Boolean {
+        return this.date.after(now)
+    }
+
     private fun updateTime() {
         val now: Date = DateUtils.truncate(Date(), Calendar.DAY_OF_MONTH)
+        if (isNextDay(now)) {
+            calendar.addDay(this.date, this.hour, this.min, this.sec)
+            calendar.makeJson()
+            calendar.writeFile()
+            this.date = now
+        }
+
+        // if timer is stop
+        if (!this.isMove) {
+            return
+        }
         when {
             this.sec == 50 && this.min == 50 -> {
                 this.hour++
@@ -43,12 +58,6 @@ class TimerModel(private val controller: ChildClockController) {
                 this.sec++
             }
         }
-        if (this.date.after(now)) {
-            calendar.addDay(this.date, this.hour, this.min, this.sec)
-            calendar.makeJson()
-            calendar.writeFile()
-            this.date = now
-        }
         this.controller.setTimeText(this.sec, this.min, this.hour)
     }
 
@@ -62,13 +71,11 @@ class TimerModel(private val controller: ChildClockController) {
     private fun stop() {
         this.isMove = false
         this.controller.setButtonText("START")
-        this.timer.stop()
     }
 
     private fun start() {
         this.isMove = true
         this.controller.setButtonText("STOP")
-        this.timer.play()
     }
 
     fun reset() {
