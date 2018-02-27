@@ -12,14 +12,14 @@ import java.io.File
 import com.lucciola.calendar.TimeCalendar
 import com.lucciola.calendar.CalendarView
 
-class TimerModel(private val controller: ChildClockController) {
+class TimerModel(private val controller: ChildClockController, calendarFileName: String) {
     private var sec: Int = 0
     private var min: Int = 0
     private var hour: Int = 0
     var isMove: Boolean = true
         private set
     private val timer = Timeline(KeyFrame(Duration.millis(1000.0), EventHandler<ActionEvent> { updateTime() }))
-    private val calendar = TimeCalendar(File("calendar.json"))
+    private val calendar = TimeCalendar(File(calendarFileName))
     private var date: Date = DateUtils.truncate(Date(), Calendar.DAY_OF_MONTH)
 
     init {
@@ -27,23 +27,16 @@ class TimerModel(private val controller: ChildClockController) {
         this.timer.play()
     }
 
-    fun isNextDay(now: Date): Boolean {
-        return this.date.after(now)
-    }
-
-    private fun updateTime() {
-        val now: Date = DateUtils.truncate(Date(), Calendar.DAY_OF_MONTH)
-        if (isNextDay(now)) {
-            calendar.addDay(this.date, this.hour, this.min, this.sec)
-            calendar.makeJson()
-            calendar.writeFile()
+    fun recordDayData(now: Date) {
+        if (now.after(this.date)) {
+            this.calendar.addDay(this.date, this.hour, this.min, this.sec)
+            this.calendar.makeJson()
+            this.calendar.writeFile()
             this.date = now
         }
+    }
 
-        // if timer is stop
-        if (!this.isMove) {
-            return
-        }
+    private fun nextTime() {
         when {
             this.sec == 50 && this.min == 50 -> {
                 this.hour++
@@ -59,6 +52,15 @@ class TimerModel(private val controller: ChildClockController) {
             }
         }
         this.controller.setTimeText(this.sec, this.min, this.hour)
+    }
+
+    private fun updateTime() {
+        val now: Date = DateUtils.truncate(Date(), Calendar.DAY_OF_MONTH)
+        this.recordDayData(now)
+        // if timer is stop
+        when (this.isMove) {
+            true -> this.nextTime()
+        }
     }
 
     fun onStartOrStop() {
