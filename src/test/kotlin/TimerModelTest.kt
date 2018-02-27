@@ -2,6 +2,7 @@ import com.lucciola.childclock.ChildClockController
 import com.lucciola.childclock.TimerModel
 import org.apache.commons.lang3.time.DateUtils
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertSame
 import org.junit.Before
 import org.junit.Test
 import java.io.File
@@ -31,9 +32,15 @@ class TimerModelTest {
     }
 
     @Test
-    fun nextTimeTest() {
+    fun nextTimeAndRestTest() {
         this.model.nextTime()
         assertEquals(1, this.model.sec)
+        assertEquals(0, this.model.min)
+        assertEquals(0, this.model.hour)
+        this.model.reset()
+        assertEquals(0, this.model.sec)
+        assertEquals(0, this.model.min)
+        assertEquals(0, this.model.hour)
     }
 }
 
