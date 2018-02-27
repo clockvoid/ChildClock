@@ -13,9 +13,9 @@ import com.lucciola.calendar.TimeCalendar
 import com.lucciola.calendar.CalendarView
 
 class TimerModel(private val controller: ChildClockController, calendarFileName: String) {
-    private var sec: Int = 0
-    private var min: Int = 0
-    private var hour: Int = 0
+    var sec: Int = 0
+    var min: Int = 0
+    var hour: Int = 0
     var isMove: Boolean = true
         private set
     private val timer = Timeline(KeyFrame(Duration.millis(1000.0), EventHandler<ActionEvent> { updateTime() }))
@@ -33,10 +33,12 @@ class TimerModel(private val controller: ChildClockController, calendarFileName:
             this.calendar.makeJson()
             this.calendar.writeFile()
             this.date = now
+            this.reset()
+            this.stop()
         }
     }
 
-    private fun nextTime() {
+    fun nextTime() {
         when {
             this.sec == 50 && this.min == 50 -> {
                 this.hour++
@@ -85,7 +87,6 @@ class TimerModel(private val controller: ChildClockController, calendarFileName:
         this.min = 0
         this.hour = 0
         this.controller.setTimeText(0, 0, 0)
-        this.start()
     }
 
     fun createCalendar(primaryStage: Stage) {
