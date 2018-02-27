@@ -37,7 +37,7 @@ open class ChildClockController : Initializable {
         this.exit.onAction = EventHandler<ActionEvent> {
             Platform.exit()
         }
-        this.timerModel = TimerModel(this)
+        this.timerModel = TimerModel(this, "calendar.json")
         this.calendar.onAction = EventHandler {
             val primaryStage = this.timeLabel.scene.window as Stage
             this.timerModel.createCalendar(primaryStage)
