@@ -1,7 +1,7 @@
 import com.lucciola.childclock.ChildClockController
 import com.lucciola.childclock.TimerModel
-import junit.framework.Assert.assertEquals
 import org.apache.commons.lang3.time.DateUtils
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import java.io.File
@@ -27,6 +27,13 @@ class TimerModelTest {
         this.model.recordDayData(now)
         val dateFormat: DateFormat = DateFormat.getDateInstance(DateFormat.LONG, Locale.JAPAN)
         assertEquals("[{\"date\":\"${dateFormat.format(this.date)}\",\"time\":\"00:00:00\"}]", this.calendar.absoluteFile.bufferedReader().use { it.readText() })
+        assertEquals(false, this.model.isMove)
+    }
+
+    @Test
+    fun nextTimeTest() {
+        this.model.nextTime()
+        assertEquals(1, this.model.sec)
     }
 }
 
