@@ -14,10 +14,10 @@ import javax.imageio.ImageIO
 
 class ChildClockView {
     // Task Tray Icon Initialisation
-    private var tray: SystemTray = SystemTray.getSystemTray()
-    private var icon: TrayIcon = TrayIcon(ImageIO.read(this::class.java.classLoader.getResource("web_hi_res_512.png")))
+    private val tray: SystemTray = SystemTray.getSystemTray()
+    private val icon: TrayIcon = TrayIcon(ImageIO.read(this::class.java.classLoader.getResource("web_hi_res_512.png")))
     // init popup menu
-    private var popupMenu = PopupMenu()
+    private val popupMenu = PopupMenu()
 
     init {
         // change icon resizeable
