@@ -1,4 +1,5 @@
 package com.lucciola.childclock
+import com.lucciola.Settings
 import javafx.application.Platform
 import javafx.fxml.FXML
 import javafx.fxml.Initializable
@@ -9,6 +10,7 @@ import javafx.scene.control.Label
 import javafx.scene.control.MenuItem
 import javafx.scene.input.KeyCombination
 import javafx.stage.Stage
+import java.io.File
 import java.net.URL
 import java.util.*
 
@@ -19,6 +21,7 @@ open class ChildClockController : Initializable {
     @FXML lateinit var exit: MenuItem
     @FXML lateinit var calendar: MenuItem
     private lateinit var timerModel: TimerModel
+    private lateinit var settings: Settings
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         this.startStopButton.isMnemonicParsing = true
@@ -41,6 +44,10 @@ open class ChildClockController : Initializable {
         this.calendar.onAction = EventHandler {
             val primaryStage = this.timeLabel.scene.window as Stage
             this.timerModel.createCalendar(primaryStage)
+        }
+        this.settings = Settings(File("settings.json"))
+        if (!this.settings.isEnableReset()) {
+            this.resetButton.isDisable = true
         }
     }
 
