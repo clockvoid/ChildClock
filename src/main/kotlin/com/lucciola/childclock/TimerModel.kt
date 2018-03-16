@@ -53,6 +53,9 @@ class TimerModel(private val controller: ChildClockController, calendarFileName:
                 this.sec++
             }
         }
+        if (this.hour == 0 && this.min == 0 && this.sec == 5) {
+            this.controller.makeDialog("One hour alert!", "一時間経ってます！", "一時間が経過しました．そろそろやめましょう．")
+        }
         this.controller.setTimeText(this.sec, this.min, this.hour)
     }
 

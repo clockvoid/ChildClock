@@ -5,9 +5,7 @@ import javafx.fxml.FXML
 import javafx.fxml.Initializable
 import javafx.event.ActionEvent
 import javafx.event.EventHandler
-import javafx.scene.control.Button
-import javafx.scene.control.Label
-import javafx.scene.control.MenuItem
+import javafx.scene.control.*
 import javafx.scene.input.KeyCombination
 import javafx.stage.Stage
 import java.io.File
@@ -57,5 +55,13 @@ open class ChildClockController : Initializable {
 
     open fun setButtonText(text: String) {
         this.startStopButton.text = text
+    }
+
+    open fun makeDialog(title: String, header: String, content: String) {
+        val alert = Alert( Alert.AlertType.NONE , "" , ButtonType.OK)
+        alert.title = title
+        alert.dialogPane.headerText = header
+        alert.dialogPane.contentText = content
+        alert.show()
     }
 }
