@@ -1,5 +1,6 @@
 package com.lucciola.childclock
 
+import com.lucciola.Settings
 import javafx.animation.KeyFrame
 import javafx.animation.Timeline
 import javafx.event.ActionEvent
@@ -21,6 +22,7 @@ class TimerModel(private val controller: ChildClockController, calendarFileName:
     private val timer = Timeline(KeyFrame(Duration.millis(1000.0), EventHandler<ActionEvent> { updateTime() }))
     private val calendar = TimeCalendar(File(calendarFileName))
     private var date: Date = DateUtils.truncate(Date(), Calendar.DAY_OF_MONTH)
+    private val settings = Settings(File("settings.json"))
 
     init {
         this.timer.cycleCount = Timeline.INDEFINITE
@@ -53,8 +55,13 @@ class TimerModel(private val controller: ChildClockController, calendarFileName:
                 this.sec++
             }
         }
-        if (this.hour == 1 && this.min == 0 && this.sec == 0) {
-            this.controller.makeDialog("One hour alert!", "一時間経ってます！", "一時間が経過しました．そろそろやめましょう．")
+        if (this.settings.setting.alert
+                && this.hour == this.settings.setting.alert_time[0]
+                && this.min == this.settings.setting.alert_time[1]
+                && this.sec == this.settings.setting.alert_time[2]) {
+            this.controller.makeDialog(this.settings.setting.alert_title
+                    ,this.settings.setting.alert_header
+                    , this.settings.setting.alert_content)
         }
         this.controller.setTimeText(this.sec, this.min, this.hour)
     }
@@ -62,7 +69,7 @@ class TimerModel(private val controller: ChildClockController, calendarFileName:
     private fun updateTime() {
         val now: Date = DateUtils.truncate(Date(), Calendar.DAY_OF_MONTH)
         this.recordDayData(now)
-        // if timer is stop
+        // if timer is stopped
         when (this.isMove) {
             true -> this.nextTime()
         }
