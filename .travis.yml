@@ -11,12 +11,13 @@ matrix:
             - oracle-java8-installer
             - oracle-java8-set-default
 
-script: ./gradlew build makeExecutableJar --info --stacktrace --console=plain --max-workers=1 --no-daemon -Dkotlin.compiler.execution.strategy=in-proces -Dkotlin.colors.enabled=false
+script: ./gradlew build test makeExecutableJar --info --stacktrace --console=plain --max-workers=1 --no-daemon -Dkotlin.compiler.execution.strategy=in-proces -Dkotlin.colors.enabled=false
 
 deploy:
   provider: releases
-  api_key: 807d9c1dfc17983c092ce31d062d7687dea43d01
-  file: $HOME/build/libs/childclock.jar
+  api_key:
+    secure: cNpnIYhS0TNG9HSDRxRmoatd0Ykt8dNpjdzv1tJL/f5cma3Vh969bPOQCJgVKe5swZ6gF6Wj3tnZfnbNQXWIkWwWTL574HfZ/w5Yvge70BgM+p5MZTQBQqkMLX4DKlaLRM9T/8sLhrpgAjN/XO4GvvrhVwbQwUeWAnjCHSJwCnSnWa1cZgdjN2iqZ7QfzdlzvuX4UCZ/wO16XvPz194iHsORQcBq2uoiYb9ikfuStp1EzQuozbvVMmowstiYiDftbt/VgX8oi/RX3AVqg3KYvbF9XowGRqconvjwVMZf/ivGH4xerFzLLy2bClbKLyPCqwE9qxbp8MxI+RgIpRVAQ7FmBHgfUs09Ht5IHEWpgyMeM3/X+YMeFtceOQ8UiTfBnpBeWUyGRKylDuS2IWPAjpc0Uh263SgFNfopzzYvg/FR2RYiVrn/jUifok/n/Hlb6IyR1thbx2unzLmk/ejWLVkiBPLMVMnY7nuI/KW8DVkM5lRKojNe+t6NsdJfHgJNR2MjT6gWMF3U+ZI4fO5ppQSI7s1Q2DMp+H5TVfoXgLy/KWJleO0tIxAysCJneCMQmfQY7R5pT1DbrCdcQ97zyTceQwS/E9JTchVuIzI1HGtIH3ivPxSa/1b+bn2cdtETcWfS8jE6BguNwwyTMygTHqlXp1RhOL0VGyJHgDi+jkY=
+  file: ./build/libs/childclock.jar
   skip_cleanup: true
   on:
     tags: true
