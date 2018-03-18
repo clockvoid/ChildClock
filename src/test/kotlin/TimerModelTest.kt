@@ -42,6 +42,18 @@ class TimerModelTest {
         assertEquals(0, this.model.min)
         assertEquals(0, this.model.hour)
     }
+
+    @Test
+    fun testStartAndStop() {
+        this.model.stop()
+        assertEquals(false, this.model.isMove)
+        this.model.stop()
+        assertEquals(false, this.model.isMove)
+        this.model.start()
+        assertEquals(true, this.model.isMove)
+        this.model.start()
+        assertEquals(true, this.model.isMove)
+    }
 }
 
 class ChildClockControllerMock : ChildClockController() {

@@ -82,12 +82,12 @@ class TimerModel(private val controller: ChildClockController, calendarFileName:
         }
     }
 
-    private fun stop() {
+    fun stop() {
         this.isMove = false
         this.controller.setButtonText("START")
     }
 
-    private fun start() {
+    fun start() {
         this.isMove = true
         this.controller.setButtonText("STOP")
     }
